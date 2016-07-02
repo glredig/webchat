@@ -1,0 +1,21 @@
+body {
+	font-size: 14px;
+	font-family: arial, sans-serif;
+}
+
+#chat_window {
+	position: fixed;
+	left: 0;
+	top: 0
+	right: 0;
+	bottom: 50px;
+	min-width: 300px;
+}
+
+#input_container {
+	position: fixed;
+	bottom: 0;
+	height: 50px;
+	width: 100%;
+	min-width: 300px;
+}
