@@ -6,10 +6,21 @@
 
 
 	btn.addEventListener('click', function() {
-		socket.emit('chat message', field.value);
+		transmit(field.value);
+	});
+
+	field.addEventListener('keydown', function(e) {
+		console.log(e.keyCode);
+		if (e.keyCode === 13) {
+			transmit(field.value);
+		}
+	});
+
+	function transmit(msg) {
+		socket.emit('chat message', msg);
 		field.value = '';
 		return false;
-	});
+	}
 
 	socket.on('chat message', function(msg) {
 		var new_msg = document.createElement('li');
