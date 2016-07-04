@@ -3,16 +3,21 @@
 	var btn = document.getElementById('send');
 	var field = document.getElementById('message');
 	var message_list = document.getElementById('messages');
-
+	var color = getRandomGrey();
 
 	btn.addEventListener('click', function() {
-		transmit(field.value);
+		transmit({
+			'text': field.value,
+			'color': color
+		});
 	});
 
 	field.addEventListener('keydown', function(e) {
-		console.log(e.keyCode);
 		if (e.keyCode === 13) {
-			transmit(field.value);
+			transmit({
+				'text': field.value,
+				'color': color 
+			});
 		}
 	});
 
@@ -22,9 +27,16 @@
 		return false;
 	}
 
+	function getRandomGrey() {
+		var num = Math.floor(Math.random() * 70 + 185);
+
+		return 'rgb(' + num + ', ' + num + ', ' + num + ')';
+	}
+
 	socket.on('chat message', function(msg) {
 		var new_msg = document.createElement('li');
-		new_msg.innerText = msg;
+		new_msg.innerText = msg.text;
+		new_msg.style.backgroundColor = msg.color;
 
 		message_list.appendChild(new_msg);
 	});
